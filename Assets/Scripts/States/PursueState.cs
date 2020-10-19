@@ -6,17 +6,44 @@ using UnityEngine.AI;
 [CreateAssetMenu(fileName = "PursueState", menuName = "States/Pursue")]
 public class PursueState : BaseState
 {
+    public float DistanceTreshold;
+    public float RepathTreshold;
+    public float RepathTimer;
+
     public override StateInstance CreateInstance(Agent agent)
     {
-        var target = GameObject.FindObjectOfType<Player>();
-        return new TargetStateInstance { Agent = agent, Target = target.GetComponent<Agent>() };
+        var target = FindObjectOfType<Player>();
+        var result =  new StateInstance { Agent = agent, Target = target.GetComponent<Agent>() };
+
+        Repath(result);
+
+        return result;
+    }
+
+    public void Repath(StateInstance stateInstance)
+    {
+        NavMesh.CalculatePath(stateInstance.Agent.transform.position, stateInstance.Target.transform.position, int.MaxValue, stateInstance.Path);
+        stateInstance.Index = 0;
+        stateInstance.Timer = RepathTimer;
+    }
+
+    public bool ShouldRepath(StateInstance stateInstance)
+    {
+        if((stateInstance.Target.transform.position - stateInstance.Agent.transform.position).sqrMagnitude > (RepathTreshold * RepathTreshold)) {
+            return true;
+        }
+
+        return false;
     }
 
     public override Steering GetSteering(StateInstance stateInstance)
     {
-        var targetStateInstance = stateInstance as TargetStateInstance;
-
-        var pathFound = NavMesh.CalculatePath(targetStateInstance.Agent.transform.position, targetStateInstance.Target.transform.position, int.MaxValue, stateInstance.Path);
+        stateInstance.Timer -= Time.deltaTime;
+        if(stateInstance.Timer <= 0) {
+            if (ShouldRepath(stateInstance)) {
+                Repath(stateInstance);
+            }
+        }
 
         if(stateInstance.Path != null && stateInstance.Path.corners.Length > 1) {
             var corners = stateInstance.Path.corners;
@@ -25,7 +52,24 @@ public class PursueState : BaseState
             }
         }
 
-        var direction = (targetStateInstance.Target.transform.position - targetStateInstance.Agent.transform.position).normalized;
+        var position = stateInstance.Agent.transform.position;
+        var targetPosition = position;
+        if (stateInstance.Path.status == NavMeshPathStatus.PathComplete) {
+
+            var distance = (stateInstance.Path.corners[stateInstance.Index] - position);
+
+            if (distance.sqrMagnitude < DistanceTreshold * DistanceTreshold) {
+                stateInstance.Index++;
+            }
+
+            if(stateInstance.Index == stateInstance.Path.corners.Length) {
+                Repath(stateInstance);
+            }
+
+            targetPosition = stateInstance.Path.corners[stateInstance.Index];
+        }
+
+        var direction = (targetPosition - stateInstance.Agent.transform.position).normalized;
         var result = new Steering {
             MovementDirection = direction,
             RotationDirection = direction

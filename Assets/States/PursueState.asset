@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09558787773a5bf40b7c786ee945aa5d, type: 3}
   m_Name: PursueState
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  UseAvoidObstacles: 1
+  DistanceTreshold: 0.5
+  RepathTreshold: 1
+  RepathTimer: 0.25
