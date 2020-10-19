@@ -24,6 +24,7 @@ public abstract class BaseState: ScriptableObject
 
         Debug.DrawLine(agentPosition, agentPosition + agentDirection * distance, Color.red, 0.5f);
         if(Physics.Raycast(agentPosition, agentDirection, out var hit, distance, obstacleMask, QueryTriggerInteraction.Ignore)) {
+
             var position = hit.point + hit.normal * distance;
             var direction = (position - agentPosition).normalized;
             steering.MovementDirection = direction;
