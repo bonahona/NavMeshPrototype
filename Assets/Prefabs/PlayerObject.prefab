@@ -225,12 +225,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 10
-  Acceleration: 20
-  RotationSpeed: 5
-  TargetRotationDirection: {x: 0, y: 0, z: 0}
+  Movement: {fileID: 11400000, guid: d2800848fcb195644bec29bc58d40d5e, type: 2}
   TargetMovementDirection: {x: 0, y: 0, z: 0}
   CurrentMovementDirection: {x: 0, y: 0, z: 0}
-  CurrentRotationDirection: {x: 0, y: 0, z: 0}
+  TargetRotationDirection: 0
+  CurrentRotationDirection: 0
 --- !u!54 &6388982595941691925
 Rigidbody:
   m_ObjectHideFlags: 0
