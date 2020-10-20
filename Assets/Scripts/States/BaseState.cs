@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class BaseState: ScriptableObject
 {
@@ -12,6 +13,17 @@ public abstract class BaseState: ScriptableObject
     }
 
     public abstract Steering GetSteering(StateInstance stateInstance);
+
+    protected void Repath(StateInstance stateInstance, float repathTimer)
+    {
+        NavMesh.CalculatePath(stateInstance.Agent.transform.position, stateInstance.Target.transform.position, int.MaxValue, stateInstance.Path);
+        for(var i = 0; i < stateInstance.Path.corners.Length; i ++) {
+            stateInstance.Path.corners[i].y = 0;
+        }
+
+        stateInstance.Index = 0;
+        stateInstance.Timer = repathTimer;
+    }
 
     protected void AvoidObstacles(StateInstance stateInstance, Steering steering)
     {
@@ -29,6 +41,8 @@ public abstract class BaseState: ScriptableObject
             var direction = (position - agentPosition).normalized;
             steering.MovementDirection = direction;
             steering.RotationDirection = direction;
+
+            stateInstance.ProxyPosition = position;
         }
     }
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FastLerpMovement
   m_EditorClassIdentifier: 
   Acceleration: 20
-  Rotation: 5
+  Rotation: 10

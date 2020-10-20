@@ -37,6 +37,7 @@ public class Agent : MonoBehaviour
 
     public void SetMovementDirection(Vector3 direction)
     {
+        direction.y = 0;
         TargetMovementDirection = direction.normalized;
     }
 

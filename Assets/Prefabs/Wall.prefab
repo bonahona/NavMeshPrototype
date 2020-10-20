@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1576301400510858025}
   - component: {fileID: 1576301400510858030}
   - component: {fileID: 1576301400510858031}
+  - component: {fileID: 523274614}
   m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1576301400510858028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.36, y: 0.98, z: -1.9006157}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -104,3 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1eb8e87950efa4c9865f9363a67d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &523274614
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576301400510858028}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

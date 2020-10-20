@@ -70,7 +70,9 @@
     <Compile Include="Assets\Scripts\Movement\LerpMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\LinearMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementBase.cs" />
+    <Compile Include="Assets\Scripts\NavMeshBoy.cs" />
     <Compile Include="Assets\Scripts\Obstacle.cs" />
+    <Compile Include="Assets\Scripts\Pathing.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\States\BaseState.cs" />
