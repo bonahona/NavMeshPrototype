@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\States\PursueState.cs" />
     <Compile Include="Assets\Scripts\States\StateInstance.cs" />
     <Compile Include="Assets\Scripts\Steering.cs" />
+    <Compile Include="Assets\Scripts\Wall.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Bona/Documents/Unity Projects/AiAgents/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PatrolPath: []
+  CurrentRotationDirection: 0
+  Movement: {fileID: 11400000, guid: d2800848fcb195644bec29bc58d40d5e, type: 2}
 --- !u!1 &5097763150839190994
 GameObject:
   m_ObjectHideFlags: 0
