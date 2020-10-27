@@ -67,8 +67,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7ae9c48f2220c48922684f5b9480d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 5
+  Type: 0
   PatrolPath: []
+  MaxMovementDistance: 0
   CurrentRotationDirection: 0
+  CurrentMovementDirection: {x: 0, y: 0, z: 0}
+  TargetMovementDirection: {x: 0, y: 0, z: 0}
   Movement: {fileID: 11400000, guid: d2800848fcb195644bec29bc58d40d5e, type: 2}
 --- !u!1 &5097763150839190994
 GameObject:
