@@ -103,7 +103,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4193463933370645247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8924713465067433818}
@@ -166,7 +166,6 @@ GameObject:
   - component: {fileID: 6388982595941691929}
   - component: {fileID: 6388982595941691930}
   - component: {fileID: 6388982595941691931}
-  - component: {fileID: 6388982595941691925}
   - component: {fileID: 7170918497743338478}
   m_Layer: 0
   m_Name: PlayerObject
@@ -197,7 +196,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6388982595941691926}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -230,22 +229,6 @@ MonoBehaviour:
   CurrentMovementDirection: {x: 0, y: 0, z: 0}
   TargetRotationDirection: 0
   CurrentRotationDirection: 0
---- !u!54 &6388982595941691925
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6388982595941691926}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &7170918497743338478
 MonoBehaviour:
   m_ObjectHideFlags: 0

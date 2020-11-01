@@ -65,22 +65,18 @@
     <Compile Include="Assets\BonaDataEditor\Scripts\Extensions\CollectionExtensions.cs" />
     <Compile Include="Assets\BonaDataEditor\Scripts\Extensions\ObjectExtension.cs" />
     <Compile Include="Assets\Scripts\Agent.cs" />
+    <Compile Include="Assets\Scripts\AgentInput.cs" />
     <Compile Include="Assets\Scripts\AiAgent.cs" />
+    <Compile Include="Assets\Scripts\BehaviourContext.cs" />
+    <Compile Include="Assets\Scripts\BehaviourState.cs" />
     <Compile Include="Assets\Scripts\Movement\DummyMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\LerpMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\LinearMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementBase.cs" />
-    <Compile Include="Assets\Scripts\NavMeshBoy.cs" />
-    <Compile Include="Assets\Scripts\Obstacle.cs" />
-    <Compile Include="Assets\Scripts\Pathing.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerCamera.cs" />
-    <Compile Include="Assets\Scripts\States\BaseState.cs" />
+    <Compile Include="Assets\Scripts\StateInstance.cs" />
     <Compile Include="Assets\Scripts\States\PursueState.cs" />
-    <Compile Include="Assets\Scripts\States\StateInstance.cs" />
-    <Compile Include="Assets\Scripts\Steering.cs" />
-    <Compile Include="Assets\Scripts\Wall.cs" />
-    <None Include="Assets\ShaderTest\TestShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Bona/Documents/Unity Projects/AiAgents/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

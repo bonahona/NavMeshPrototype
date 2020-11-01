@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 
 [BonaDataEditor]
-[RequireComponent(typeof(NavMeshAgent))]
 public class Agent : MonoBehaviour
 {
     public float MovementSpeed = 1f;
@@ -24,13 +23,10 @@ public class Agent : MonoBehaviour
     [HideInInspector]
     public float CurrentRotationDirection;
 
-    protected NavMeshAgent NavMeshAgent;
-
     // Start is called before the first frame update
     public virtual void Start()
     {
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        if(Movement == null) {
+        if (Movement == null) {
             Movement = ScriptableObject.CreateInstance<DummyMovement>();
         }
     }
@@ -58,8 +54,7 @@ public class Agent : MonoBehaviour
         CurrentRotationDirection = Movement.GetRotationDirection(CurrentRotationDirection, TargetRotationDirection);
 
         transform.rotation = Quaternion.Euler(0, CurrentRotationDirection, 0);
-
-        NavMeshAgent.Move(offset);
+        transform.position = transform.position + offset;
     }
 
     public float GetMovementSpeed()

@@ -1,94 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-[CreateAssetMenu(fileName = "PursueState", menuName = "States/Pursue")]
-public class PursueState : BaseState
+[CreateAssetMenu(fileName = "Pursue", menuName = "State/Pursue")]
+public class PursueState : BehaviourState
 {
-    public float DistanceTreshold;
-    public float RepathTreshold;
-    public float RepathTimer;
+    public float RepathTimer = 0.25f;
 
-    public override StateInstance CreateInstance(Agent agent)
-    {
-        var target = FindObjectOfType<Player>();
-        var result =  new StateInstance { Agent = agent, Target = target.GetComponent<Agent>() };
+    public class PursueStateInstance: StateInstance {
+        public Agent Target;
+        public float CurrentRepathTimer;
 
-        Repath(result, RepathTimer);
-
-        return result;
+        public PursueStateInstance(BehaviourState state, Agent target): base(state)
+        {
+            Target = target;
+        }
     }
 
-    public bool ShouldRepath(StateInstance stateInstance)
+    public override StateInstance CreateInstance(BehaviourContext context)
     {
-        if((stateInstance.Target.transform.position - stateInstance.Agent.transform.position).sqrMagnitude > (RepathTreshold * RepathTreshold)) {
-            return true;
-        }
-
-        return false;
+        return new PursueStateInstance(this, context.Target);
     }
 
-    public override Steering GetSteering(StateInstance stateInstance)
+    public override AgentInput Execute(StateInstance instance, BehaviourContext context)
     {
-        var position = stateInstance.Agent.transform.position;
-        var targetPosition = position;
+        var pursueInstance = instance as PursueStateInstance;
+        pursueInstance.CurrentRepathTimer -= Time.deltaTime;
 
-        stateInstance.Timer -= Time.deltaTime;
-        if(stateInstance.Timer <= 0) {
-            if (ShouldRepath(stateInstance)) {
-                Repath(stateInstance, RepathTimer);
-            }
+        if(pursueInstance.CurrentRepathTimer <= 0) {
+            pursueInstance.CurrentRepathTimer = RepathTimer;
+            context.SetTarget(pursueInstance.Target.transform.position);
         }
 
-        if (!stateInstance.ProxyPosition.HasValue) {
-            if (stateInstance.Path != null && stateInstance.Path.corners.Length > 1) {
-                var corners = stateInstance.Path.corners;
-                for (int i = 0; i < corners.Length - 1; i++) {
-                    Debug.DrawLine(corners[i], corners[i + 1], Color.magenta);
-                }
-            }
-        } else {
-            Debug.DrawLine(position, stateInstance.ProxyPosition.Value, Color.green);
-        }
-
-
-        if (stateInstance.ProxyPosition.HasValue) {
-            targetPosition = stateInstance.ProxyPosition.Value;
-            var distance = (targetPosition - position);
-            if(distance.sqrMagnitude < DistanceTreshold * DistanceTreshold) {
-                stateInstance.ProxyPosition = null;
-            }
-
-        } else {
-            position.y = 0;
-            targetPosition.y = 0;
-            if (stateInstance.Path.status == NavMeshPathStatus.PathComplete) {
-
-                var distance = (stateInstance.Path.corners[stateInstance.Index] - position);
-
-                if (distance.sqrMagnitude < DistanceTreshold * DistanceTreshold) {
-                    stateInstance.Index++;
-                }
-
-                if (stateInstance.Index == stateInstance.Path.corners.Length) {
-                    Repath(stateInstance, RepathTimer);
-                }
-
-                targetPosition = stateInstance.Path.corners[stateInstance.Index];
-            }
-        }
-
-        var direction = (targetPosition - stateInstance.Agent.transform.position).normalized;
-        var result = new Steering {
+        var direction = (context.AiAgent.ProxyObject.nextPosition - context.Agent.transform.position).normalized;
+        var result = new AgentInput {
             MovementDirection = direction,
-            RotationDirection = direction
+            RotationDirection = direction,
+            Done = false
         };
 
-        if (UseAvoidObstacles) {
-            AvoidObstacles(stateInstance, result);
-        }
-
         return result;
     }
+
+
 }
